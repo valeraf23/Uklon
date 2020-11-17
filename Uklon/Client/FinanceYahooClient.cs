@@ -76,13 +76,13 @@ namespace Uklon.Client
             return res;
         }
 
-        public async Task<double> GetAAPL()
+        public async Task<double> GetAapl()
         {
             const string companyKey = "AAPL";
             return await GetMaxProfit(companyKey);
         }
         
-        public async Task<double> GetMSFT()
+        public async Task<double> GetMsft()
         {
             const string companyKey = "MSFT";
             return await GetMaxProfit(companyKey);
@@ -90,7 +90,7 @@ namespace Uklon.Client
 
         public DateTime UnixTimeToDateTime(long unixTime)
         {
-            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dtDateTime = dtDateTime.AddMilliseconds(unixTime).ToLocalTime();
             return dtDateTime;
         }
@@ -98,8 +98,7 @@ namespace Uklon.Client
         private static bool IsHttpError(HttpResponseMessage response)
         {
             var num = (int) response.StatusCode / 100;
-
-            return (num == 4 || num == 5);
+            return num == 4 || num == 5;
         }
 
         private static void ThrowIfHttpError(HttpResponseMessage response, string url)
