@@ -132,14 +132,14 @@ namespace Uklon.Client
 
         private static string GetRequestString(string companyKey, int from, long to, string interval)
         {
-            var redirectTargetDictionary = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 {"symbol", companyKey},
                 {"period1", from.ToString()},
                 {"period2", to.ToString()},
                 {"interval", interval}
             };
-            return QueryString.Create(redirectTargetDictionary).Value;
+            return QueryString.Create(parameters).Value;
         }
     }
 }
