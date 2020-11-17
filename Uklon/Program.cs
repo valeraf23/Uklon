@@ -22,7 +22,6 @@ namespace Uklon
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
 
-
             var serviceProvider = serviceCollection.BuildServiceProvider();
            await serviceProvider!.GetService<IProgramService>()!.Run();
         }
