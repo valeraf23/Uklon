@@ -12,7 +12,7 @@ namespace Uklon
     {
         private static IConfiguration _configuration;
 
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
@@ -23,7 +23,7 @@ namespace Uklon
             ConfigureServices(serviceCollection);
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-           await serviceProvider!.GetService<IProgramService>()!.Run();
+            await serviceProvider!.GetService<IProgramService>()!.Run();
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
@@ -32,7 +32,7 @@ namespace Uklon
             serviceCollection
                 .AddPolicies(_configuration)
                 .ConfigureServicesForFinanceYahooClient(_configuration);
-            serviceCollection.AddSingleton<IMaximizeProfitService,MaximizeProfitService>();
+            serviceCollection.AddSingleton<IMaximizeProfitService, MaximizeProfitService>();
             serviceCollection.AddScoped<IProgramService, ProgramService>();
         }
     }
