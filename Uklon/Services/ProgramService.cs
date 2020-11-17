@@ -17,12 +17,22 @@ namespace Uklon.Services
 
         public async Task Run()
         {
-            var googleTask = _client.GetGoogle().ContinueWith(r => _logger.LogInformation($"Google : {r.Result}"));
-            var aaplTask = _client.GetAapl().ContinueWith(r => _logger.LogInformation($"AAPL : {r.Result}"));
-            var msftTask = _client.GetMsft().ContinueWith(r => _logger.LogInformation($"MSFT : {r.Result}"));
+            var googleTask = _client.GetGoogle()
+                .ContinueWith(r =>
+                    _logger.LogInformation($"Google : {r.Result}"));
+
+            var aaplTask = _client.GetAapl()
+                .ContinueWith(r =>
+                    _logger.LogInformation($"AAPL : {r.Result}"));
+
+            var msftTask = _client.GetMsft()
+                .ContinueWith(r =>
+                    _logger.LogInformation($"MSFT : {r.Result}"));
+
             Task.WaitAll(googleTask, aaplTask, msftTask);
-            aaplTask.GetAwaiter().GetResult();
+
             await Task.CompletedTask;
+
             _logger.LogInformation("Finish");
         }
     }
