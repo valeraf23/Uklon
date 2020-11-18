@@ -96,8 +96,8 @@ namespace Uklon.Client
         private async Task<double> GetMaxProfit(string companyKey, int from, long to, string interval)
         {
             var historyPrices = await GetHistoryPricesFor(companyKey, from, to, interval);
-            var prices = historyPrices.Where(h => h.Open != null && h.Close != null)
-                .Select(x => new[] {x.Open.Value, x.Close.Value}).SelectMany(p => p).ToArray();
+            var prices = historyPrices.Where(h => h.Open.HasValue && h.Close.HasValue)
+                .Select(x => new[] {x.Open!.Value, x.Close!.Value}).SelectMany(p => p).ToArray();
             var res = _maximizeProfit.Calculate(prices);
             return res;
         }
