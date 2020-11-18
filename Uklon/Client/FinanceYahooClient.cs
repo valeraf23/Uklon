@@ -96,7 +96,7 @@ namespace Uklon.Client
         {
             var historyPrices = await GetHistoryPricesFor(companyKey, from, to, interval);
             var prices = historyPrices.Where(h => h.Open.HasValue && h.Close.HasValue)
-                .Select(x => new[] {x.Open!.Value, x.Close!.Value}).SelectMany(p => p).ToArray();
+                .SelectMany(x => new[] {x.Open!.Value, x.Close!.Value}).ToArray();
             var res = _maximizeProfit.Calculate(prices);
             return res;
         }
