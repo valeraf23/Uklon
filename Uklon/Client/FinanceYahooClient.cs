@@ -80,14 +80,13 @@ namespace Uklon.Client
         private static Quote GetQuote(JObject jo)
         {
             const string quotePath = "chart.result[0].indicators.quote[0]";
-            return jo.SelectToken(quotePath)
-                .ToObject<Quote>();
+            return jo.SelectToken(quotePath)?.ToObject<Quote>();
         }
 
         private static IEnumerable<DateTime> GetDates(JObject jo)
         {
             const string timestampPath = "chart.result[0].timestamp";
-            var timestamps = jo.SelectToken(timestampPath)
+            var timestamps = jo.SelectToken(timestampPath)?
                 .Select(t => UnixTimeToDateTime(t.Value<long>()))
                 .ToList();
             return timestamps;
