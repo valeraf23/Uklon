@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Uklon.Client;
 using Uklon.Helpers;
 using Uklon.Services;
 
@@ -33,6 +34,7 @@ namespace Uklon
                 .AddPolicies(_configuration)
                 .ConfigureServicesForFinanceYahooClient(_configuration);
             serviceCollection.AddSingleton<IMaximizeProfitService, MaximizeProfitService>();
+            serviceCollection.AddScoped<IMaxProfitFinanceYahooService, MaxProfitFinanceYahooService>();
             serviceCollection.AddScoped<IProgramService, ProgramService>();
         }
     }
